@@ -49,7 +49,15 @@ This ARC task solution is achieved by removing all columns and rows containing z
 <img width="470" alt="image" src="https://user-images.githubusercontent.com/46656717/146689113-6664aef4-efeb-4014-b754-71c8bd451e13.png">
 
 
+# Task 5 - beb8660c.json
+This ARC task involves rearranging the rows from largest at the bottom of the array to the smallest at the top. The rows should be aligned to right side 
+This ARC problem involves extracting the array values that are non zero and create a new array and map the values based on the count to the corresponding color.
+This ARC task solution is achieved by 
 
+- Creating two lists, one for counting the occureneces of colors, another for colors itself by iterating over the nd array.
+- np.count_zero function is used to find the number of non-zero values.
+- 
+- slicing the matrix from the row and columns indexes will give us the result.
 
 
 
