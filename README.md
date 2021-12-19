@@ -54,23 +54,15 @@ This ARC task involves rearranging the rows from largest at the bottom of the ar
 This ARC problem involves extracting the array values that are non zero and create a new array and map the values based on the count to the corresponding color.
 This ARC task solution is achieved by 
 
-- Creating two lists, one for counting the occureneces of colors, another for colors itself by iterating over the nd array.
-- np.count_zero function is used to find the number of non-zero values.
-- 
-- slicing the matrix from the row and columns indexes will give us the result.
+- Step1 - Creating two lists, one for counting the occureneces of colors, another for colors itself by iterating over the nd array.
+- Step2 - Count the non-zero occurences of color using np.count_zero and append to the count list created in step 1
+- Step3 When the count of occureneces is greater than 0, find the correct value corresponding to the occurence using np.max() function. _(np.max() function is used for simplicity purposes, the row values are same but returns the value even while using np.max() function )_
 
-
-
-
-
-
-
-
-
-
-
-
-
+- Step4 -  Get the index of the counts in ascending order,  np.argsort is used to retuyrn the indices of the counts list
+- Step 5 - Rearrnage the color and count lists accordingly
+- Step 6 - Using enumerate function, create a index which will be used to add it with nth row in array - color list row such that the least count of color comes at the top though non-colored row exists still.
+- Step 7 - Replace all other places with respective color
+<img width="456" alt="image" src="https://user-images.githubusercontent.com/46656717/146693707-4fff6f7c-fd24-47f6-bd32-96ec1404fe7f.png">
 
 
 # The Abstraction and Reasoning Corpus (ARC)
