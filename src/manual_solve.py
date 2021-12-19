@@ -16,15 +16,48 @@ init() # this colorama init helps Windows
 ### result. Name them according to the task ID as in the three
 ### examples below. Delete the three examples. The tasks you choose
 ### must be in the data/training directory, not data/evaluation.
-def solve_6a1e5592(x):
-    return x
+def solve_3c9b0459(x):
+    """
+    This ARC problem is of grid size 3x3 where from the training examples it is clear that
+    it solution is achieved by swaping the 1st column with the third and followed by rows as same.
+    """
+    x[:,[2, 0]] = x[:,[0, 2]]   # first swap the column 3 with column 1
+    x[[2, 0],:] = x[[0, 2],:]   # swap the row 3 with the row 1
+    return x  #return the result
 
-def solve_b2862040(x):
-    return x
+def solve_5bd6f4ac(x):
+    """
+    This ARC task involves with slicing and dicing of the numpy array where the input 
+    of size 9x9 is sliced to 3x3. The result is from first row till 3rd and last three columns 
+    from the training example.
+    """
+    x = x[:3,-3:] #slice the np matrix for first three rows and last three columns
+    return x  #return the result
 
-def solve_05269061(x):
-    return x
+def solve_08ed6ac7(x):
+    """
+    The ARC task involves replacing the grey grids with colors in order as follows,
+    1st higher grey grid = blue
+    2nd higher grey grid = red
+    3rd higher grey grid = green
+    4th grey grid = yellow
 
+    Initiate the color code for blue (higher order) as 1. Determine the shape of the array and assign 
+    it to rows and columns. 
+
+    Loop from 0th to mth row and 0th to nth column
+    """
+    
+    color = 1 # the intial color blue as per color code
+    m = x.shape[0] # determine the no. of rows
+    n = x.shape[1] # determine the no. of coloumns
+    for i in range(0,m):
+        for j in range(0,n):
+            #search for the grey color which is coded as 5
+            if  x[i][j] == 5: #if the color matches
+                x[i:m,j] = color #replace the current column with color code from the row until the end of the row
+                color += 1  #increase the color code by 1 so as to change the color when iteration encounters next time 
+    return x #return the output array
     
 
 
