@@ -30,6 +30,8 @@ def solve_5bd6f4ac(x):
     This ARC task involves with slicing and dicing of the numpy array where the input 
     of size 9x9 is sliced to 3x3. The result is from first row till 3rd and last three columns 
     from the training example.
+    Step1- slice the np matrix for first three rows and last three columns
+    return x  #return the result
     """
     x = x[:3,-3:] #slice the np matrix for first three rows and last three columns
     return x  #return the result
@@ -42,10 +44,14 @@ def solve_08ed6ac7(x):
     3rd higher grey grid = green
     4th grey grid = yellow
 
-    Initiate the color code for blue (higher order) as 1. Determine the shape of the array and assign 
-    it to rows and columns. 
+    The solution for this ARC task is acheieved by:
 
-    Loop from 0th to mth row and 0th to nth column
+    Step1- Initiating the color code for blue (higher order) as 1. 
+    Step2- Determine the shape of the array and assign it to rows and columns variables. 
+    Step3- Loop from 0th to mth row and 0th to nth column
+    Step4- Search for the grey color which is coded as 5,if the color matches
+         - replace the current column with color code from the row until the end of the row
+         - increase the color code by 1 so as to change the color when iteration encounters next time 
     """
     
     color = 1 # the intial color blue as per color code
@@ -58,7 +64,32 @@ def solve_08ed6ac7(x):
                 x[i:m,j] = color #replace the current column with color code from the row until the end of the row
                 color += 1  #increase the color code by 1 so as to change the color when iteration encounters next time 
     return x #return the output array
-    
+
+def solve_1cf80156(x):
+    """
+    This ARC task solution is achieved by removing all columns and rows containing zero values only.
+
+    The approach is to find all the rows and columns with np.all function which generates boolean 1D array
+    from which, indexes of nonzero value columns can be identified with np.where function.
+
+    Further slicing the matrix from the row and columns indexes will give us the result.
+
+    Step1- finding boolean result for zero values in rows(m_array)
+    Step2- finding the indexes of the non-zero elements(m_idx)
+    Step3- finding the boolean result for zero values in columns(n_array)
+    Step4- finding the indexes of the non-zero elements (n_idx)
+    Step5- Slicing the array x with the indices containing non-zero values
+
+    x = x[m_idx[0][0]:m_idx[0][-1]+1, n_idx[0][0]:n_idx[0][-1]+1] #slice the matrix with the indexes containing non_zero values.
+    """
+
+    m_array = np.all(x==0, axis=1)  #find boolean reslut for zero values in rows
+    m_idx = np.where(m_array == False) #find the indexes of the non-zero elements
+    n_array = np.all(x==0, axis=0) #find the boolean result for zero values in columns
+    n_idx = np.where(n_array == False) #find the indexes of the non-zero elements 
+
+    x = x[m_idx[0][0]:m_idx[0][-1]+1, n_idx[0][0]:n_idx[0][-1]+1] #slice the matrix with the indexes containing non_zero values.
+    return x
 
 
 def main():
