@@ -8,7 +8,10 @@ import re
 from colorama import Fore, Style, init
 init() # this colorama init helps Windows 
 
+###### STUDENT NAME: KRISHNA RAVICHANDRAN
+######  STUDENT ID: 16233039
 
+###### GITHUB URL : https://github.com/Kpd01/ARC
     
 
 ### YOUR CODE HERE: write at least three functions which solve
@@ -80,6 +83,9 @@ def solve_1cf80156(x):
     Step4- finding the indexes of the non-zero elements (n_idx)
     Step5- Slicing the array x with the indices containing non-zero values
 
+    np.all() function is used to 
+    np.where()function is used
+
     x = x[m_idx[0][0]:m_idx[0][-1]+1, n_idx[0][0]:n_idx[0][-1]+1] #slice the matrix with the indexes containing non_zero values.
     """
 
@@ -90,6 +96,51 @@ def solve_1cf80156(x):
 
     x = x[m_idx[0][0]:m_idx[0][-1]+1, n_idx[0][0]:n_idx[0][-1]+1] #slice the matrix with the indexes containing non_zero values.
     return x
+
+def solve_beb8660c(x):
+    """
+This ARC task involves rearranging the rows from largest at the bottom of the array to the smallest at the top. The rows should be aligned to right side 
+This ARC problem involves extracting the array values that are non zero and create a new array and map the values based on the count to the corresponding color.
+This ARC task solution is achieved by 
+
+- Step1 - Creating two lists, one for counting the occureneces of colors, another for colors itself by iterating over the nd array.
+- Step2 - Count the non-zero occurences of color using np.count_zero and append to the count list created in step 1
+- Step3 When the count of occureneces is greater than 0, find the correct value corresponding to the occurence using np.max() function. _(np.max() function is used for simplicity purposes, the row values are same but returns the value even while using np.max() function )_
+
+- Step4 -  Get the index of the counts in ascending order,  np.argsort is used to retuyrn the indices of the counts list
+- Step 5 - Rearrnage the color and count lists accordingly
+- Step 6 - Using enumerate function, create a index which will be used to add it with nth row in array - color list row such that the least count of color comes at the top though non-colored row exists still.
+- Step 7 - Replace all other places with respective color
+    """
+    color_list = list()  #make a list for colors and counts of the colors
+    count_list = list()
+    for i in x: #loop over each row in x
+        cnt = np.count_nonzero(i, axis=0)  #find the count of non_zero elements
+        #print(cnt)
+        if cnt > 0:
+            row_color = np.max(i)   #find the correct value corresponding to the occurence using np.max() function. (np.max() function is used for simplicity purposes, the row values are same but returns the value even while using np.max() function )
+
+            #print('r', row_color)
+            color_list.append(row_color)    #append the count and color to the list
+            count_list.append(cnt)
+
+    #print('colors before', color_list)
+    #print('counts before', count_list)
+    ids = np.argsort(count_list)      #get the index of the counts in the ascending order
+    #print('sorted index',ids)
+    count_list = np.array(count_list)[ids]   #rearrange the counts and color based on the np.argsort
+
+    color_list = np.array(color_list)[ids]
+    #print('colors after', color_list)
+    #print('counts after',count_list)
+    x = np.zeros_like(x)    #make an empty array of zeros with the shape of x
+    #print(x)
+    for j, (count, color) in enumerate(zip(count_list, color_list)):   
+        row = j + x.shape[0] - color_list.shape[0]  #find the rows of the color supposed to be in
+        #print(row)
+        x[row, -count:] = color   #replace the row with the color in the respective places
+        #print(x)
+    return x   #return the output 
 
 
 def main():
